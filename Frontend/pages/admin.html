@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/stylesheet/admin.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo">Admin Panel</div>
+        <ul class="menu">
+            <li onclick="showSection('dashboard')">Dashboard</li>
+            <li onclick="showSection('orders')">Orders</li>
+            <li onclick="showSection('products')">Products</li>
+            <li onclick="showSection('settings')">Settings</li>
+        </ul>
+    </div>
+
+    <div class="main">
+
+        <div id="dashboard" class="content active">
+            <h2>Dashboard</h2>
+        </div>
+
+        <div id="orders" class="content">
+            <h2>Orders</h2>
+            <div id="orders-list"></div>
+        </div>
+
+
+        <div id="products" class="content">
+            <div class="flex justify-between">
+                <h2>Products</h2>
+                <button class="btn-add-product bg-blue-600 text-white py-2 px-4 rounded-lg"
+                    onclick="showProductForm()">add Product</button>
+            </div>
+
+            <div id="product-list" class="mt-5">
+
+                <div class="card">
+                    <img src="/image/image_0901.jpg" alt="Product Image" />
+
+                    <div class="details">
+                        <div class="product-name">AYL polyester yarn</div>
+                        <div class="color">Color : golden</div>
+                    </div>
+
+                    <div class="special-info">
+                        150/48 AVL Golden pain super Bright Polyester yarn for high tensile strength
+                    </div>
+
+                    <!-- Edit and Delete Buttons Side by Side -->
+                    <div class="price-cart">
+                        <button class="edit">Edit</button>
+                        <button class="delete">Delete</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="overlay" id="overlay" onclick="hideProductForm()"></div>
+
+            <!-- Product Form Modal -->
+            <div class="product-form-modal" id="productFormModal">
+                <h3 class="form-title">Add New Product</h3>
+                <form id="productForm">
+                    <input class="form-input" type="text" id="name" placeholder="Product Name" required />
+                    <input class="form-input" type="text" id="color" placeholder="Color" required />
+                    <input class="form-input" type="text" id="price_per_kg" placeholder="Price per kg" required />
+                    <input class="form-input" type="number" id="stock" placeholder="Stock in kg" required />
+                    <input class="form-input" type="text" id="weight_options"
+                        placeholder="Weight Options (e.g. 50g, 100g)" />
+                    <input class="form-input" type="file" id="imageFile" accept="image/*" />
+                    <img id="imagePreview" src="" style="max-width: 100%; margin-top: 10px; display: none;" />
+
+                    <textarea class="form-input" id="description" placeholder="Description" rows="3"></textarea>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-submit">Submit</button>
+                        <button type="button" class="btn btn-cancel" onclick="hideProductForm()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+
+        <div id="settings" class="content">
+            <h2>Settings</h2>
+            <!-- Settings content goes here -->
+        </div>
+    </div>
+
+    <script>
+        // Helper function to show/hide sections
+        function showSection(sectionId) {
+            document.querySelectorAll('.content').forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+
+            if (sectionId === 'orders') {
+                loadOrders();
+            }
+            if (sectionId === 'dashboard') {
+                loadAnalytics();
+            }
+            if (sectionId === 'products') {
+                loadProducts();
+            }
+
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('dashboard');
+        });
+
+    </script>
+    <script src="/scripts/admindashboard.js"></script>
+    <script src="/scripts/adminorder.js"></script>
+    <script src="/scripts/adminproduct.js"></script>
+    <script src="/scripts/adminsetting.js"></script>
+</body>
+
+</html>

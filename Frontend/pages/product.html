@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yarn Shop - Product Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheet/product.css">
+</head>
+
+<body>
+
+    <nav id="navbar" class="top-0 left-0 h-16 w-full flex gap-3 sm:gap-5 md:gap-0 md:justify-between items-center 
+    lg:px-32 md:px-20 sm:px-14 px-5 z-20 shadow-md bg-white">
+
+
+        <button id="menubtn" class="md:hidden" onclick="openSidebar()">
+            <img id="menulogo" class="h-8" src="/image/menu-svgrepo-com (3).svg">
+        </button>
+
+        <a href="/"><img id="logo" src="/image/logo.png" alt="Logo" class="h-10 md:h-12 sm:h-12 lg:h-12 text-white invert"></a>
+
+        <ul id="navlist"
+            class="hidden md:flex text-base md:gap-10 lg:gap-20  text-black font-semibold text-base sm:text-lg md:text-xl lg:text-2xl">
+            <li class="navlinks cursor-pointer"><a href="/">Home</a>
+            </li>
+            <li class="navlinks cursor-pointer"><a href="#">Product</a>
+            </li>
+            <li class="navlinks cursor-pointer"><a href="/user/contactPage">Contact</a>
+            </li>
+        </ul>
+
+        <div class="hidden md:flex md:gap-6 lg:gap-10 md:h-9 lg:h-10">
+            <a href="/signup.html" id="signupbtn"
+                class="hidden skeleton flex justify-center items-center bg-blue-500 text-white px-3 rounded-md text-center">SignUp</a>
+            <a href="/login.html" id="loginbtn"
+                class="hidden skeleton flex justify-center items-center bg-blue-500 text-white px-3 rounded-md text-center">Login</a>
+            <a href=""><img id="cartbtn" class="hidden skeleton h-9 invert" src="/image/cart-shopping-svgrepo-com.png"></a>
+            <a href="/user/account"><img id="profilebtn" class="hidden skeleton h-9 invert"
+                    src="/image/profile-circle-svgrepo-com.png"></a>
+        </div>
+    </nav>
+
+    <div id="product-container" class="flex flex-wrap gap-x-5 gap-y-10 lg:px-32 md:px-20 sm:px-14 px-5 mt-10">
+
+    </div>
+
+    <div class="footer bg-[rgb(34,45,53)] px-6 sm:px-10 lg:px-32 py-10 mt-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <!-- Company Info -->
+            <div class="text-white text-center md:text-left">
+                <img src="/image/logo.png" class="mx-auto md:mx-0 w-32">
+                <p class="text-sm sm:text-base lg:text-lg mt-4">Akshar Twister since 2010 in textile market and
+                    manufacturer of fiber, yarn texture.</p>
+            </div>
+
+            <!-- Links -->
+            <div class="text-white text-center md:text-left">
+                <p class="text-lg font-semibold">Links</p>
+                <ul class="mt-4 space-y-2">
+                    <li class="cursor-pointer hover:text-gray-300"><a href="/">Home</a></li>
+                    <li class="cursor-pointer hover:text-gray-300"><a href="#product-container">Product</a></li>
+                    <li class="cursor-pointer hover:text-gray-300"><a href="/user/contactPage">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="text-white text-center md:text-left">
+                <p class="text-lg font-semibold">Service</p>
+                <ul class="mt-4 space-y-2">
+                    <li class="cursor-pointer hover:text-gray-300"><a href="#">Cotton Yarn</a></li>
+                    <li class="cursor-pointer hover:text-gray-300"><a href="#">Wool Yarn</a></li>
+                    <li class="cursor-pointer hover:text-gray-300"><a href="#">Custom Orders</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="text-white text-center md:text-left">
+                <p class="text-lg font-semibold">Contact</p>
+                <ul class="mt-4 space-y-2">
+                    <li class="cursor-pointer hover:text-gray-300"><a
+                            href="mailto:akshar5400@gmail.com">akshar5400@gmail.com</a></li>
+                    <li class="cursor-pointer hover:text-gray-300"><a href="tel:+919375736884">+91 93757 36884</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <hr class="border-gray-600 mt-8">
+        <p class="text-center text-white mt-5 text-sm sm:text-base">© 2025 Akshar Twister. All Rights Reserved.</p>
+    </div>
+
+    <script src="/scripts/product.js"></script>
+
+</body>
+
+</html>

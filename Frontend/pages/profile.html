@@ -1,0 +1,52 @@
+<h1 class="text-blue-700 font-bold text-2xl">Profile rendered</h1>
+
+<div class="bg-gray-100 w-full py-5 flex flex-col gap-10 mt-[25px]">
+    <div class="bg-gray-100 w-full md:min-w-[500px] md:w-[50%] flex flex-col gap-10 p-3 sm:p-4">
+        <div class="flex flex-col md:flex-row justify-between">
+            <span>Company Name</span>
+            <div class="relative">
+                <input id="name" class="w-64 px-3 py-1 rounded-md">
+                <p id="nameError" class="absolute hidden top-[90%] text-red-500">Error</p>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between">
+            <span>Phone Number</span>
+            <div class="relative">
+                <input id="phone" class="w-64 px-3 py-1 rounded-md" type="number">
+                <p id="phoneError" class="absolute hidden top-[90%] text-red-500">Error</p>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between">
+            <span>Email</span>
+            <div class="relative">
+                <input id="email" class="w-64 px-2 py-1 md:px-3 md:py-1 rounded-md">
+                <p id="emailError" class="absolute hidden top-[90%] text-red-500">Error</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="relative bg-gray-100 w-full py-5 flex flex-col gap-4 mt-[25px] px-4">
+    <a id="changePasswordtext" class="cursor-pointer mb-5 text-blue-700">Change Password</a>
+    <div id="changePassworddiv" class="hidden flex flex-col gap-7 sm:w-[400px] md:w-[500px] transition-all">
+        <div class="flex flex-col md:flex-row justify-between">
+            <label for="oldpassword">Old Password</label>
+            <input id="oldpassword" class="px-3 py-1" placeholder="Enter Old Password">
+        </div>
+        <div class="flex flex-col md:flex-row justify-between">
+            <label for="newpassword">New Password</label>
+            <input id="newpassword" class="px-3 py-1" placeholder="Enter New Password">
+        </div>
+        <div class="flex flex-col md:flex-row justify-between">
+            <label for="confirmpassword">Confirm Password</label>
+            <input id="confirmpassword" class="px-3 py-1" placeholder="Enter Confirm Password">
+        </div>
+    </div>
+    <p id="passwordError" class="hidden text-red-500">Error</p>
+</div>
+
+<div class="w-full py-5 flex gap-10 mt-[25px] px-4 justify-end">
+    <button id="savebtn" class="cursor-not-allowed bg-gray-300 w-[10%] px-5 py-2 text-white rounded-lg mr-[5vw]"
+        disabled>Save</button>
+</div>
+

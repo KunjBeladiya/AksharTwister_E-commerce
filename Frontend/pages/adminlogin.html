@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-widthdevice-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheet/signup.css">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="/public/stylesheet/output.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- From Uiverse.io by JohnnyCSilva -->
+    <div class="w-full h-[100vh] flex justify-center items-center">
+
+        <form id="loginForm" class="">
+
+            <div class="signupFormdiv">
+
+                <div class="inputbox">
+                    <div class="flex-column">
+                        <label>Email </label>
+                    </div>
+                    <div class="inputForm">
+                        <img src="/image/alternate_email_24dp_000000_FILL0_wght200_GRAD0_opsz24.svg">
+                        <input id="email" placeholder="Enter your Email" class="input" type="text">
+                    </div>
+                    <p id="emailError" class="errmsg"></p>
+                </div>
+
+                <div class="inputbox">
+                    <div class="flex-column">
+                        <label>Password </label>
+                    </div>
+                    <div class="inputForm">
+                        <img src="/image/lock_24dp_000000_FILL0_wght200_GRAD0_opsz24.svg">
+                        <input id="password" placeholder="Enter your Password" class="input" type="password">
+                    </div>
+                    <p id="passwordError" class="errmsg"></p>
+                </div>
+
+
+                <div id="generalError" class="text-red-500"></div>
+                <button id="signIn_btn" class="button-submit">Sign In</button>
+
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <!-- <p class="p line">Or With</p>
+
+                <div class="flex-row">
+                    <button class="btn google">
+                        <img class="h-6" src="/image/google-svgrepo-com.svg">
+                        Google
+                </div> -->
+
+                <p class="p">Don't have an account? <span class="span">SignUp</span>
+                </p>
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <script>
+
+        console.log("script runnung");
+
+        function validateForm() {
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            let isValid = true;
+
+            // Email Validation
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById("emailError").innerText =
+                    "Enter a valid email address!";
+                isValid = false;
+            } else {
+                document.getElementById("emailError").innerText = "";
+            }
+
+            // Password Validation
+            let passwordPattern = /^(?=.*\d).{8,}$/;
+            if (!passwordPattern.test(password)) {
+                document.getElementById("passwordError").innerText =
+                    "Password must be 8+ chars";
+                isValid = false;
+            } else {
+                document.getElementById("passwordError").innerText = "";
+            }
+
+            // Submit if all is valid
+            return isValid;
+        }
+
+        async function loginUser() {
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            try {
+                const response = await fetch("/admin/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({ email, password }),
+                });
+
+                const data = await response.json();
+                console.log(data);
+                console.log(document.cookie);
+                console.log(data.success);
+                if (data.success) {
+                    window.location.href = "/admin";    
+                } else {
+                    document.getElementById("generalError").innerText = data.message;
+                }
+            } catch (error) {
+                console.log("error in loginuser", error);
+            }
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            console.log("form submited");
+
+            if (!validateForm()) return;
+
+            await loginUser();
+        });
+
+
+    </script>
+
+</body>
+
+</html>

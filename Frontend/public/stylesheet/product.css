@@ -1,0 +1,84 @@
+html{
+  scroll-behavior: smooth;
+}
+
+.skeleton {
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.card {
+    background-color: #fff;
+    width: 300px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 16px;
+  }
+  
+  .card img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    height: 260px;
+  }
+  
+  .details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+  }
+  
+  .details .product-name {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .details .color {
+    background-color: #eee;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  .special-info {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #555;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  /* NEW: Price and Cart button side by side */
+  .price-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    gap: 8px;
+  }
+  
+  .price-box {
+    color: #000000;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    flex: 1;
+  }
+  
+  .add-to-cart {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex: 1;
+  }
+  
+  .add-to-cart:hover {
+    background-color: #0056b3;
+  }
+  

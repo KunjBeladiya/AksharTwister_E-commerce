@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+
+        html{
+            scroll-behavior: smooth;
+        }
+
+        .hero-container {
+            background: linear-gradient(to bottom, rgb(0, 0, 0, 0.7) 5%, rgba(255, 255, 255, 0.1)) 10%,
+                radial-gradient(circle, rgba(255, 248, 248, 0), rgba(1, 9, 34, 0.5) 6%, rgb(0, 0, 0)) 1000%,
+                url("/image/1d42858cthumbnail.jpeg");
+            background-size: cover;
+            /* Ensures the image covers the full div */
+            background-position: center;
+            /* Centers the image */
+            background-repeat: no-repeat;
+            /* Prevents tiling */
+            height: 100vh;
+            /* Full screen height */
+            width: 100%;
+            /* Full screen width */
+            position: relative;
+            /* Ensures it stays fixed */
+        }
+
+        .skeleton {
+            opacity: 0.5;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                scale: 0.7;
+            }
+
+            to {
+                opacity: 1;
+                scale: 1;
+            }
+        }
+
+        .anim-block {
+            animation: appear linear;
+            animation-timeline: view();
+            animation-range: entry 0% cover 30%;
+        }
+
+        .bg {
+            background: linear-gradient(to bottom, rgba(4, 15, 28, 0.8) 5%, rgba(4, 15, 28, 0.8)) 10%,
+                url("/image/Yarn-manufacturing-compressed.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <nav id="navbar" class="fixed top-0 left-0 h-16 w-full flex gap-3 sm:gap-5 md:gap-0 md:justify-between items-center 
+                            lg:px-32 md:px-20 sm:px-14 px-5 z-20">
+
+
+        <button id="menubtn" class="md:hidden" onclick="openSidebar()">
+            <img id="menulogo" class="h-8" src="/image/menu-svgrepo-com (3).svg">
+        </button>
+
+        <a href="#h-container"><img id="logo" src="/image/logo.png" alt="Logo" class="h-10 md:h-12 sm:h-12 lg:h-12 text-white"></a>
+
+        <ul id="navlist"
+            class="hidden md:flex text-base md:gap-10 lg:gap-20  text-white font-semibold text-base sm:text-lg md:text-xl lg:text-2xl">
+            <li class="navlinks cursor-pointer"><a href="#">Home</a>
+            </li>
+            <li class="navlinks cursor-pointer"><a href="/product/productpage">Product</a>
+            </li>
+            <li class="navlinks cursor-pointer"><a href="/user/contactPage">Contact</a>
+            </li>
+        </ul>
+
+        <div class="hidden md:flex md:gap-6 lg:gap-10 md:h-9 lg:h-10">
+            <a href="signup.html" id="signupbtn"
+                class="hidden skeleton flex justify-center items-center bg-blue-500 text-white px-3 rounded-md text-center">SignUp</a>
+            <a href="login.html" id="loginbtn"
+                class="hidden skeleton flex justify-center items-center bg-blue-500 text-white px-3 rounded-md text-center">Login</a>
+            <a href=""><img id="cartbtn" class="hidden skeleton h-9" src="/image/cart-shopping-svgrepo-com.png"></a>
+            <a href="/user/account"><img id="profilebtn" class="hidden skeleton h-9" src="/image/profile-circle-svgrepo-com.png"></a>
+        </div>
+
+    </nav>
+
+    <div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-900 text-white transform -translate-x-full 
+               z-20 transition-transform duration-300 ease-in-out md:hidden">
+        <button class="absolute top-4 right-4 text-white text-2xl" onclick="closeSidebar()">&times;</button>
+        <ul class="mt-16 text-lg font-semibold space-y-6 p-6">
+            <li class="cursor-pointer"><a href="#">Home</a></li>
+            <li class="cursor-pointer"><a href="/product/productpage">Product</a></li>
+            <li class="cursor-pointer"><a href="#">Contact</a></li>
+            <li><button class="bg-blue-500 text-white px-4 py-2 rounded-md w-full mt-4">SignUp</button></li>
+            <li><button class="bg-blue-500 text-white px-4 py-2 rounded-md w-full">Login</button></li>
+        </ul>
+    </div>
+
+    <div id="overlay" class="hidden bg-[rgba(0,0,0,0.6)] fixed inset-0 z-10"></div>
+
+    <div id="h-container" class="hero-container lg:px-32 md:px-20 sm:px-14 px-5">
+
+        <div class="absolute top-[40%] z-10">
+            <p class="typing-text text-white font-bold text-5xl sm:4xl md:text-6xl lg:text-7xl xl:text-8xl">
+                Yarn Sourcing <br> Made Easy
+            </p>
+            <p class="typing-text text-white font-bold text-5xl sm:4xl md:text-6xl lg:text-7xl xl:text-8xl"></p>
+            <p class="mt-10 text-white text-sm sm:text-lg md: tracking-wider font-light">Revolutionizing the textile
+                industry with
+                cutting-edge technology,<br> ethically sourced materials, and uncompromising quality <br> at <span
+                    class="font-bold text-blue-300">Akshar Twister</span></p>
+        </div>
+    </div>
+
+    <div class="bg-white grid gap-4 p-4 sm:pt-0 sm:grid-cols-12
+    pl-4 pr-4 sm:pl-10 sm:pr-10 md:pl-20 md:pr-20 lg:pl-32 lg:pr-32">
+
+        <div class="min-h-[100px] max-h-[550px] bg-[rgba(0,73,136,0.19)] sm:col-span-4 sm:p-4 p-1 sm:rounded-b-2xl rounded-xl
+        grid sm:grid-cols-1 grid-cols-2 sm:gap-10 gap-3 place-items-center">
+
+            <div class="anim-block justify-self-start p-2 pt-5 pb-5 sm:p-3 md:p-4 lg:p-5 lg:pt-16">
+                <p class=""><span
+                        class="text-red-500 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">15+</span><span
+                        class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-black">Years Of</span>
+                </p>
+                <p class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-black">Working</p>
+                <p class="text-2xl sm:text-3xl md:text-4xl  lg:text-5xl text-[#180080] font-semibold">Experience</p>
+            </div>
+            <div>
+                <img class="anim-block rounded-2xl" src="/image/istockphoto-1148056974-612x612.jpg">
+            </div>
+
+
+        </div>
+
+        <div class="min-h-[100px] text-black sm:col-span-8">
+            <div class="anim-block flex flex-col items-center pt-5">
+                <p class="flex justify-center text-black text-base sm:text-lg md:text-xl font-semibold">We Give Top
+                    Production from every<span class="text-[#180080] font-bold">&nbsp;Angle</span></p>
+                <p class="w-[20%] bg-black mt-1 h-1"></p>
+            </div>
+            <div class="grid grid-cols-2 pt-10">
+
+                <div class="flex flex-col items-start pl-5 md:pl-10 lg:pl-20 xl:pl-24 pr-3 md:pr-5 lg:pr-10 xl:pr-14
+                pb-3 pt-3 sm:pb-4 sm:pt-4 md:pb-8 md:pt-8
+                border-r-2 border-b-2 border-[#D9D9D9]">
+                    <div class="anim-block flex justify-center items-center gap-3">
+                        <img class="h-4 sm:h-6 md:h-8" src="/image/thread-fashion-svgrepo-com.svg">
+                        <p class="text-sm sm:text-base md:text-xl font-bold">Quality Assurance</p>
+                    </div>
+                    <p class="pt-8 anim-block">Quality is our priority <br>
+                        Premium yarn is our speciality</p>
+                    <p
+                        class="anim-block self-end pt-6 text-xl sm:text-2xl md:text-3xl font-bold text-[#0e5496] mt-auto">
+                        01</p>
+                </div>
+
+
+                <div class="flex flex-col items-start pl-5 md:pl-10 lg:pl-20 xl:pl-24 pr-3 md:pr-5 lg:pr-10 xl:pr-14
+                    pb-3 pt-3 sm:pb-4 sm:pt-4 md:pb-8 md:pt-8
+                    border-l-2 border-b-2 border-[#D9D9D9]">
+                    <div class="anim-block flex justify-center items-center gap-3">
+                        <img class="h-4 sm:h-6 md:h-8" src="/image/thread-fashion-svgrepo-com.svg">
+                        <p class="text-sm sm:text-base md:text-xl font-bold">High strength</p>
+                    </div>
+                    <p class="anim-block pt-8">High strength akshar twister <br> provide best strength of yarns
+                    <p
+                        class="anim-block self-end pt-6 text-xl sm:text-2xl md:text-3xl font-bold text-[#0e5496] mt-auto">
+                        02</p>
+                </div>
+
+
+
+                <div class="flex flex-col items-start pl-5 md:pl-10 lg:pl-20 xl:pl-24 pr-3 md:pr-5 lg:pr-10 xl:pr-14
+                    pb-3 pt-3 sm:pb-4 sm:pt-4 md:pb-8 md:pt-8
+                    border-r-2 border-t-2 border-[#D9D9D9]">
+                    <div class="anim-block flex justify-center items-center gap-3">
+                        <img class="h-4 sm:h-6 md:h-8" src="/image/thread-fashion-svgrepo-com.svg">
+                        <p class="text-sm sm:text-base md:text-xl font-bold">Production Capability</p>
+                    </div>
+                    <p class="anim-block pt-8">The yarn boasts a soft and smooth texture making it perfect for producing
+                        comfortable and high quality</p>
+                    <p
+                        class="anim-block self-end pt-6 text-xl sm:text-2xl md:text-3xl font-bold text-[#0e5496] mt-auto">
+                        03</p>
+                </div>
+
+
+
+                <div class="flex flex-col items-start pl-5 md:pl-10 lg:pl-20 xl:pl-24 pr-3 md:pr-5 lg:pr-10 xl:pr-14
+                    pb-3 pt-3 sm:pb-4 sm:pt-4 md:pb-8 md:pt-8
+                    border-l-2 border-t-2 border-[#D9D9D9]">
+                    <div class="anim-block flex justify-center items-center gap-3">
+                        <img class="h-4 sm:h-6 md:h-8" src="/image/thread-fashion-svgrepo-com.svg">
+                        <p class="text-sm sm:text-base md:text-xl font-bold">Quality Assurance</p>
+                    </div>
+                    <p class="anim-block pt-8"><span
+                            class="text-red-500 text-base sm:text-xl md:text-2xl font-bold">500+</span>
+                        tonnes yarn <br>production per month</p>
+                    <p
+                        class="anim-block self-end pt-6 text-xl sm:text-2xl md:text-3xl font-bold text-[#0e5496] mt-auto">
+                        04</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="anim-block section-2 w-full lg:px-32 md:px-20 sm:px-14 px-5 pb-10 sm:mt-32 mt-9">
+        <div class="w-full grid grid-cols-1 sm:grid-cols-12 lg:gap-5 sm:gap-2 bg-[#010922] min-h-[100px] text-white grid
+                    rounded-lg">
+            <div class="sm:col-span-7 lg:p-10 md:p-5 sm:p-3 pt-28 py-10 px-5 ">
+                <div class="pb-5">
+                    <p class="text-red-500 text-xl font-semibold">Akshar Twister Speciality</p>
+                    <p class="w-[50%] sm:w-[20%] bg-red-500 mt-1 h-1"></p>
+                </div>
+                <div class="flex flex-col gap-2 sm:gap-5 lg:gap-7 lg:pt-7">
+                    <p class="lg:text-lg md:text-base sm:text-sm text-xs">We provides best strength of yarn</p>
+                    <P class="lg:text-lg md:text-base sm:text-sm text-xs">we have 70+ unique color with advance dying
+                        technique esnure the yarn color stay vibrant even in multiple washes</P>
+                    <p class="lg:text-lg md:text-base sm:text-sm text-xs sm:mb-5">The yarn boasts a soft and smooth
+                        tecture making it perfect for producing confortable and high quality</p>
+                </div>
+
+            </div>
+
+            <div
+                class="relative h-16 sm:h-[100%] sm:col-span-5 w-full sm:order-none order-first sm:bg-[#010922] bg-white">
+                <div class="absolute left-0 right-0 sm:-top-14 top-[20%] mx-auto w-[60%] sm:w-[80%] h-[200%] sm:h-[100%] overflow-hidden rounded-lg
+                outline outline-[5px] sm:outline-8 outline-white">
+                    <img class="w-[100%] h-[100%] object-cover rounded-lg"
+                        src="/image/1000_F_636575771_VBLSDEZHB7uyqao1hiKMNNDPCq3IbsLl.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sm:anim-block section-3 w-full lg:px-32 md:px-20 sm:px-14 px-5 pb-10 sm:mt-14 mt-5">
+        <div class="w-full grid grid-cols-1 sm:grid-cols-12 lg:gap-5 sm:gap-2 gap-16 bg-white text-black min-h-[100px] grid
+                    rounded-lg">
+            <div class="anim-block sm:col-span-7 lg:p-10 md:p-5 sm:p-3 pt-28 py-10 px-5 ">
+                <div class="pb-5">
+                    <p class="text-red-500 text-xl font-semibold">Akshar Twister Speciality</p>
+                    <p class="w-[50%] sm:w-[20%] bg-red-500 mt-1 h-1"></p>
+                </div>
+                <div class="flex flex-col gap-2 sm:gap-5 lg:gap-7 lg:pt-7">
+                    <p class="lg:text-lg md:text-base sm:text-sm text-xs">We provides best strength of yarn</p>
+                    <P class="lg:text-lg md:text-base sm:text-sm text-xs">we have 70+ unique color with advance dying
+                        technique esnure the yarn color stay vibrant even in multiple washes</P>
+                    <p class="lg:text-lg md:text-base sm:text-sm text-xs sm:mb-5">The yarn boasts a soft and smooth
+                        tecture making it perfect for producing confortable and high quality</p>
+                </div>
+
+            </div>
+
+            <div class="anim-block relative h-16 sm:h-[100%] sm:col-span-5 w-full order-first ">
+                <div
+                    class="image-container relative mx-auto w-[80%] sm:w-[80%] h-[300%] sm:h-[100%] overflow-hidden rounded-lg
+                outline outline-[5px] sm:outline-[10px] outline-white sm:shadow-[rgb(135,21,21)_25px_25px] shadow-[rgb(135,21,21)_15px_15px]">
+                    <img class="w-[100%] h-[100%] object-cover rounded-lg"
+                        src="image/close-up-of-spools-of-color-threads-spinning-machine-yarn-bobbins-making-in-a-textile-factory-embroidery-machine-in-garment-industry-dyeing-fabrics-yarn-sewing-material-tool-photo.jpeg">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg mb-10 sm:my-16 lg:px-48 md:px-32 lg:py-24 md:py-20 sm:py-16 py-8 sm:px-16 w-[100%]">
+        <div
+            class="text-white flex flex-col justify-center items-center text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold">
+            <P>The Textile,Product, And Apparel</P>
+            <p><span class="text-red-500">Manufacturing</span> Industries.</p>
+        </div>
+        <div class="flex flex-col gap-10 sm:flex-row sm:gap-0 justify-between items-center pt-10 sm:pt-16">
+            <div class="flex sm:flex-col gap-10 sm:gap-5 justify-center items-center">
+                <img class="sm:h-14 md:h-24 h-20 border-[1px] border-[rgba(176,176,176,0.7)] rounded-md p-2 sm:p-5"
+                    src="/image/public.png">
+                <div class="flex flex-col justify-center items-center text-white">
+                    <p class="text-white sm:text-4xl text-3xl font-bold">350+</p>
+                    <p>Trusted Clients</p>
+                </div>
+            </div>
+            <div class="flex sm:flex-col gap-10 sm:gap-5 justify-center items-center">
+                <img class="sm:h-14 md:h-24 h-20 p-2 sm:p-5 border-[1px] border-[rgba(176,176,176,0.7)] rounded-md"
+                    src="/image/public.png">
+                <div class="flex flex-col justify-center items-center text-white">
+                    <p class="text-white sm:text-4xl text-3xl font-bold">350+</p>
+                    <p>Trusted Clients</p>
+                </div>
+            </div>
+            <div class="flex sm:flex-col gap-10 sm:gap-5 justify-center items-center">
+                <img class="sm:h-14 md:h-24 h-20 p-2 sm:p-5 border-[1px] border-[rgba(176,176,176,0.7)] rounded-md"
+                    src="/image/public.png">
+                <div class="flex flex-col justify-center items-center text-white">
+                    <p class="text-white sm:text-4xl text-3xl font-bold">350+</p>
+                    <p>Trusted Clients</p>
+                </div>
+            </div>
+            <div class="flex sm:flex-col gap-10 sm:gap-5 justify-center items-center">
+                <img class="sm:h-14 md:h-24 p-2 h-20 sm:p-5 border-[1px] border-[rgba(176,176,176,0.7)] rounded-md"
+                    src="/image/public.png">
+                <div class="flex flex-col justify-center items-center text-white">
+                    <p class="text-white sm:text-4xl text-3xl font-bold">350+</p>
+                    <p>Trusted Clients</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-10 sm:px-10 md:px-14 lg:px-32 lg:pb-20">
+        <div class="">
+            <p class="md:text-4xl sm:text-3xl text-2xl font-bold text-[rgb(34,45,53)] text-center mb-1 md:mb-2">How We
+                Work?</p>
+            <p class="bg-blue-800 h-1 mx-auto w-[10%] mb-7 sm:mb-10 md:mb-14"></p>
+            <div class="grid grid-cols-4 gap-2 md:lg-5 lg:gap-10 border-b-2">
+                <div class="">
+                    <img class="h-16 md:h-20 mx-auto" src="/image/icon04.png">
+                    <div class="border-l-2 h-[5vh] sm:h-[8vh] md:h-[10vh] w-[50%] ml-auto"></div>
+                </div>
+                <div class="">
+                    <img class="h-16 md:h-20 mx-auto" src="/image/icon05.png">
+                    <div class="border-l-2 h-[5vh] sm:h-[8vh] md:h-[10vh] w-[50%] ml-auto"></div>
+                </div>
+                <div class="">
+                    <img class="h-16 md:h-20 mx-auto" src="/image/icon06.png">
+                    <div class="border-l-2 h-[5vh] sm:h-[8vh] md:h-[10vh] w-[50%] ml-auto"></div>
+                </div>
+                <div class="">
+                    <img class="h-16 md:h-20 mx-auto" src="/image/icon07.png">
+                    <div class="border-l-2 h-[5vh] sm:h-[8vh] md:h-[10vh] w-[50%] ml-auto"></div>
+                </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 lg:gap-10 text-black">
+                <div class="">
+                    <div class="border-l-2 h-[5vh] lg:h-[10vh] w-[50%] ml-auto"></div>
+                    <div class="p-8 shadow-[0_8px_24px_rgba(149,157,165,0.2)]">
+                        <p class="text-center text-blue-900 font-bold lg:text-xl md:text-lg sm:text-base text-sm">Order
+                            Collecting</p>
+                        <p class="w-[30%] mx-auto h-1 bg-black mb-5"></p>
+                        <p class="text-center lg:text-lg md:text-base text-sm">Throught out the Akshar twister website
+                            Clients can place order and ouer team will collect</p>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="border-l-2 h-[5vh] lg:h-[10vh] w-[50%] ml-auto"></div>
+                    <div class="p-8 shadow-[0_8px_24px_rgba(149,157,165,0.2)]">
+                        <p class="text-center text-blue-900 font-bold lg:text-xl md:text-lg sm:text-base text-sm">Order
+                            Collecting</p>
+                        <p class="w-[30%] mx-auto h-1 bg-black mb-5"></p>
+                        <p class="text-center lg:text-lg md:text-base text-sm">Throught out the Akshar twister website
+                            Clients can place order and ouer team will collect</p>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="border-l-2 h-[5vh] lg:h-[10vh] w-[50%] ml-auto"></div>
+                    <div class="p-8 shadow-[0_8px_24px_rgba(149,157,165,0.2)]">
+                        <p class="text-center text-blue-900 font-bold lg:text-xl md:text-lg sm:text-base text-sm">Order
+                            Collecting</p>
+                        <p class="w-[30%] mx-auto h-1 bg-black mb-5"></p>
+                        <p class="text-center lg:text-lg md:text-base text-sm">Throught out the Akshar twister website
+                            Clients can place order and ouer team will collect</p>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="border-l-2 h-[5vh] lg:h-[10vh] w-[50%] ml-auto"></div>
+                    <div class="p-8 shadow-[0_8px_24px_rgba(149,157,165,0.2)]">
+                        <p class="text-center text-blue-900 font-bold lg:text-xl md:text-lg sm:text-base text-sm">Order
+                            Collecting</p>
+                        <p class="w-[30%] mx-auto h-1 bg-black mb-5"></p>
+                        <p class="text-center lg:text-lg md:text-base text-sm">Throught out the Akshar twister website
+                            Clients can place order and ouer team will collect</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer bg-[rgb(34,45,53)] px-6 sm:px-10 lg:px-32 py-10 mt-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <!-- Company Info -->
+            <div class="text-white text-center md:text-left">
+                <img src="/image/logo.png" class="mx-auto md:mx-0 w-32">
+                <p class="text-sm sm:text-base lg:text-lg mt-4">Akshar Twister since 2010 in textile market and
+                    manufacturer of fiber, yarn texture.</p>
+            </div>
+
+            <!-- Links -->
+            <div class="text-white text-center md:text-left">
+                <p class="text-lg font-semibold">Links</p>
+                <ul class="mt-4 space-y-2">
+                    <li class="cursor-pointer hover:text-gray-300"><a href="#h-container">Home</a></li>
+                    <li class="cursor-pointer hover:text-gray-300"><a href="/product/productPage">Product</a></li>
+                    <li class="cursor-pointer hover:text-gray-300"><a href="/user/contactPage">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="text-white text-center md:text-left">
+                <p class="text-lg font-semibold">Service</p>
+                <ul class="mt-4 space-y-2">
+                    <li class="cursor-pointer hover:text-gray-300"><a href="#">Cotton Yarn</a></li>
+                    <li class="cursor-pointer hover:text-gray-300"><a href="#">Wool Yarn</a></li>
+                    <li class="cursor-pointer hover:text-gray-300"><a href="#">Custom Orders</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="text-white text-center md:text-left">
+                <p class="text-lg font-semibold">Contact</p>
+                <ul class="mt-4 space-y-2">
+                    <li class="cursor-pointer hover:text-gray-300"><a
+                            href="mailto:akshar5400@gmail.com">akshar5400@gmail.com</a></li>
+                    <li class="cursor-pointer hover:text-gray-300"><a href="tel:+919375736884">+91 93757 36884</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <hr class="border-gray-600 mt-8">
+        <p class="text-center text-white mt-5 text-sm sm:text-base">© 2025 Akshar Twister. All Rights Reserved.</p>
+    </div>
+
+
+    <script>
+
+        function openSidebar() {
+            document.getElementById("sidebar").classList.remove("-translate-x-full");
+            document.getElementById("overlay").classList.remove("hidden");
+            document.body.classList.add("overflow-hidden"); // Prevent scrolling
+
+            setTimeout(() => {
+                document.addEventListener("click", handleOutsideClick);
+            }, 10);
+        }
+
+        function closeSidebar() {
+            document.getElementById("sidebar").classList.add("-translate-x-full");
+            document.getElementById("overlay").classList.add("hidden");
+            document.body.classList.remove("overflow-hidden"); // Re-enable scrolling
+            document.removeEventListener("click", handleOutsideClick);
+        }
+
+        function handleOutsideClick(event) {
+            const sidebar = document.getElementById("sidebar");
+            if (!sidebar.contains(event.target) && event.target.id !== "menubtn") {
+                closeSidebar();
+            }
+        }
+
+        window.addEventListener("scroll", closeSidebar);
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 50) {
+                document.getElementById("navbar").classList.add("bg-white", "shadow-md");
+                document.getElementById("logo").classList.add("invert");
+                document.getElementById("menubtn").classList.add("invert");
+                document.getElementById("navlist").classList.add("text-black");
+                document.getElementById("navlist").classList.remove("text-white");
+                document.getElementById("profilebtn").classList.add("invert");
+                document.getElementById("cartbtn").classList.add("invert");
+            } else {
+                document.getElementById("navbar").classList.remove("bg-white", "shadow-md");
+                document.getElementById("logo").classList.remove("invert");
+                document.getElementById("menubtn").classList.remove("invert");
+                document.getElementById("navlist").classList.add("text-white");
+                document.getElementById("navlist").classList.remove("text-black");
+                document.getElementById("profilebtn").classList.remove("invert");
+                document.getElementById("cartbtn").classList.remove("invert");
+            }
+
+        })
+
+        window.addEventListener("load", async (event) => {
+
+            try {
+                const response = await fetch("/user/checkAuth", {
+                    method: 'GET',
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                });
+
+                const data = await response.json();
+                console.log(data);
+
+                if (data.success) {
+                    document.getElementById("profilebtn").classList.remove("hidden","skeleton");
+                    document.getElementById("cartbtn").classList.remove("hidden","skeleton");
+                } else {
+                    document.getElementById("signupbtn").classList.remove("hidden","skeleton");
+                    document.getElementById("loginbtn").classList.remove("hidden","skeleton");
+                }
+            } catch (error) {
+                console.log("error in homepage loading : ", error);
+            }
+
+        })
+
+    </script>
+
+</body>
+
+</html>

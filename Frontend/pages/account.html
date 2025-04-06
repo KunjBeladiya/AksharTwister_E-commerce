@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sidebar Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for collapsed state */
+        #sidebar.collapsed {
+            width: 5rem !important;
+        }
+
+        .menu-item {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Hide menu text for screens smaller than md */
+        @media (max-width: 767px) {
+            .menu-text {
+                display: none;
+            }
+
+            #sidebar {
+                width: 5rem !important;
+            }
+        }
+
+        /* Fix mobile viewport height issues */
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .content-wrapper {
+            height: 100vh;
+            min-height: -webkit-fill-available;
+            display: flex;
+        }
+
+        /* Ensure sidebar and content can scroll independently */
+        #sidebar,
+        .main-content {
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+    </style>
+</head>
+
+<body class="content-wrapper">
+
+    <div id="sidebar" class="bg-blue-900 p-3 sm:p-5 transition-all duration-300 flex flex-col 
+        w-1/5 md:w-1/4 lg:w-1/5 xl:w-1/6">
+
+        <!-- Sidebar Toggle Button -->
+        <button class="text-white mb-5" onclick="toggleSidebar()">
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </button>
+
+        <!-- Menu Items -->
+        <nav class="flex flex-col gap-5 text-white">
+            <div class="menu-item flex items-center gap-5 md:px-5 py-2 rounded hover:bg-blue-700 transition-all"
+                onclick="loadPage('profile');">
+                <img class="icon h-7" src="/image/account-svgrepo-com.svg" alt="My Profile">
+                <p class="menu-text cursor-default">My Profile</p>
+            </div>
+            <div class="menu-item flex items-center gap-5 md:px-5 py-2 rounded hover:bg-blue-700 transition-all"
+                onclick="loadPage('address')">
+                <img class="icon h-7" src="/image/address-location-map-svgrepo-com.svg" alt="Address">
+                <p class="menu-text cursor-default">Address</p>
+            </div>
+            <div class="menu-item flex items-center gap-5 md:px-5 py-2 rounded hover:bg-blue-700 transition-all"
+                onclick="loadPage('order')">
+                <img class="icon h-7" src="/image/order-completed-svgrepo-com.svg" alt="Orders">
+                <p class="menu-text cursor-default">Orders</p>
+            </div>
+            <div class="menu-item flex items-center gap-5 md:px-5 py-2 rounded hover:bg-blue-700 transition-all"
+                onclick="loadPage('cart')">
+                <img class="icon h-7" src="/image/cart-shopping-svgrepo-com.png" alt="Cart">
+                <p class="menu-text cursor-default">Cart</p>
+            </div>
+            <div id="logout"
+                class="menu-item flex items-center gap-5 md:px-5 py-2 rounded hover:bg-red-500 transition-all">
+                <img class="icon h-7" src="/image/logout-2-svgrepo-com.svg" alt="Logout">
+                <p class="menu-text cursor-default">Logout</p>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div id="content" class="main-content flex-grow p-4 sm:p-5">
+        <!-- Default content loaded here -->
+    </div>
+
+
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("collapsed");
+
+            document.querySelectorAll(".menu-text").forEach(text => {
+                text.classList.toggle("hidden");
+            });
+
+            document.querySelectorAll(".menu-item").forEach((item) => {
+                item.classList.toggle("md:px-5");
+                item.classList.toggle("md:px-0");
+                item.classList.toggle("gap-5");
+                item.classList.toggle("justify-center");
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadPage("profile");
+        })
+
+        async function loadPage(page) {
+            try {
+                const response = await fetch(`/user/${page}`);
+                const data = await response.text();
+
+                document.getElementById("content").innerHTML = data; // Load new HTML content
+                loadScript(`/scripts/${page}.js`)
+
+            } catch (error) {
+                console.error("Error loading page:", error);
+            }
+        }
+
+        function loadScript(scriptSrc) {
+            const oldScript = document.querySelector(`script[src="${scriptSrc}"]`);
+            if (oldScript) oldScript.remove();  // Remove old script
+
+            const script = document.createElement("script");
+            script.src = scriptSrc;
+            script.onload = () => console.log(`${scriptSrc} loaded`);
+            document.body.appendChild(script);
+            console.log(script);
+        }
+
+        loadPage('profile');
+
+        document.getElementById("logout").addEventListener("click", async () => {
+
+            try {
+
+                const response = await fetch("/user/logout", {
+                    method: 'GET',
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                }
+                );
+
+                const data = await response.json();
+
+                if (data.success) {
+                    window.location.href = "/";
+                }
+
+
+            } catch (error) {
+                console.log("error in logout", error);
+            }
+
+        });
+
+
+    </script>
+
+</body>
+
+</html>

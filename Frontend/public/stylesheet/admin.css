@@ -1,0 +1,435 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    display: flex;
+    height: 100vh;
+}
+.sidebar {
+    width: 250px;
+    background: #333;
+    color: white;
+    padding: 20px;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.menu {
+    list-style: none;
+}
+.menu li {
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #444;
+}
+.menu li:hover {
+    background: #555;
+}
+.main {
+    flex: 1;
+    padding: 20px;
+}
+.content {
+    display: none;
+}
+.active {
+    display: block;
+}
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.product-item {
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+}
+.product-item button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+}
+
+/****** card 1 *****/
+
+/* .product-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    width: 22rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+    transition: all 0.3s;
+    border: 1px solid rgb(243, 244, 246);
+}
+
+.product-card:hover {
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.product-header {
+    position: relative;
+}
+
+.color-indicator {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 9999px;
+    border: 2px solid white;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.product-image {
+    height: 12rem;
+    background: linear-gradient(to bottom right, rgb(249, 250, 251), rgb(243, 244, 246));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image i {
+    width: 4rem;
+    height: 4rem;
+    color: rgb(156, 163, 175);
+}
+
+.product-content {
+    padding: 1.5rem;
+}
+
+.product-info {
+    margin-bottom: 1rem;
+}
+
+.product-info h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgb(31, 41, 55);
+    margin-bottom: 0.25rem;
+}
+
+.product-info p {
+    font-size: 0.875rem;
+    color: rgb(107, 114, 128);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.price-stock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.875rem;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgb(55, 65, 81);
+}
+
+.price i {
+    width: 1rem;
+    height: 1rem;
+    color: rgb(107, 114, 128);
+}
+
+.stock {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.stock.in-stock {
+    background-color: rgb(220, 252, 231);
+    color: rgb(22, 101, 52);
+}
+
+.stock.low-stock {
+    background-color: rgb(254, 249, 195);
+    color: rgb(113, 63, 18);
+}
+
+.stock.out-of-stock {
+    background-color: rgb(254, 226, 226);
+    color: rgb(153, 27, 27);
+}
+
+.weight-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.weight-chip {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+}
+
+.weight-chip.available {
+    background-color: rgb(239, 246, 255);
+    color: rgb(29, 78, 216);
+    border: 1px solid rgb(191, 219, 254);
+}
+
+.weight-chip.unavailable {
+    background-color: rgb(249, 250, 251);
+    color: rgb(107, 114, 128);
+    border: 1px solid rgb(229, 231, 235);
+}
+
+.action-buttons {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button i {
+    width: 1rem;
+    height: 1rem;
+}
+
+.edit-button {
+    background-color: rgb(239, 246, 255);
+    color: rgb(37, 99, 235);
+}
+
+.edit-button:hover {
+    background-color: rgb(219, 234, 254);
+}
+
+.delete-button {
+    background-color: rgb(254, 242, 242);
+    color: rgb(220, 38, 38);
+}
+
+.delete-button:hover {
+    background-color: rgb(254, 226, 226);
+}
+
+.dashboard{
+    display: flex;
+} */
+
+/**** card 2 ***/
+
+.card {
+    background-color: #fff;
+    width: 300px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 16px;
+  }
+  
+  .card img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    height: 260px;
+  }
+  
+  .details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+  }
+  
+  .details .product-name {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .details .color {
+    background-color: #eee;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  .special-info {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #555;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  /* Edit and Delete buttons side by side */
+  .price-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    gap: 8px;
+  }
+  
+  .edit, .delete {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  /* Edit button style */
+  .edit {
+    background-color: #fffefe;
+    color: #000;
+  }
+  
+  .edit:hover {
+    background-color: #605ec0;
+  }
+  
+  /* Delete button style */
+  .delete {
+    background-color: #f6f6f6;
+    color: rgb(0, 0, 0);
+  }
+  
+  .delete:hover {
+    background-color: #c1303f;
+  }
+
+
+/***   add product  ****/
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+  .overlay.show {
+    display: block;
+  }
+
+  /* Form modal container */
+  .product-form-modal {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 400px;
+  
+    max-height: 90vh; /* 👈 prevent it from growing too tall */
+    overflow-y: auto;  /* 👈 scroll if content overflows */
+  }
+
+  .product-form-modal.show {
+    display: block;
+  }
+
+  .form-title {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .btn-submit {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .btn-cancel {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .btn-add-product {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  #imagePreview {
+    max-width: 100%;
+    max-height: 200px; /* 👈 prevent it from being too tall */
+    margin-top: 10px;
+    display: none;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .product-form-modal::-webkit-scrollbar {
+    width: 6px;
+  }
+  .product-form-modal::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 6px;
+  }
+  

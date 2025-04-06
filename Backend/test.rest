@@ -1,0 +1,136 @@
+
+POST http://localhost:5001/user/register
+Content-Type: application/json
+
+{
+    "name": "kunj",
+    "email": "kunj5@gmail.com",
+    "password": "1234"
+}
+
+###
+
+POST http://localhost:5001/user/login
+Content-Type: application/json
+
+{
+    "email": "kunjbeladiya805@gmail.com",
+    "password": "123456789"
+}
+
+###
+
+GET http://localhost:5001/user/logout
+
+###
+
+GET http://localhost:5001/user/checkAuth
+
+###
+
+POST http://localhost:5001/user/checkUser
+Content-Type: application/json
+
+{
+    "name": "kunj",
+    "email": "kunj5@gmail.com",
+    "password": "1234"
+}
+
+### get data
+
+GET http://localhost:5001/user/profile/data
+
+
+### update user
+
+PUT http://localhost:5001/user/profile/update
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "phone": "1234567890"
+}
+
+
+### update password
+
+PUT http://localhost:5001/user/profile/updatePassword
+Content-Type: application/json
+
+{
+  "oldPassword" : "987654321",
+  "newPassword":"123456789",
+  "confirmPassword":"123456789"
+}
+
+
+
+######### Admin Routes #########
+
+### Register admin
+POST http://localhost:5001/admin/register
+Content-Type: application/json
+
+{
+    "name": "kunj",
+    "email": "kunj@gmail.com",
+    "password": "123456789"
+}
+
+### Login Admin
+
+POST http://localhost:5001/admin/login
+Content-Type: application/json
+
+{
+    "email": "kunj@gmail.com",
+    "password": "123456789"
+}
+
+###
+
+GET http://localhost:5001/admin/test
+
+###
+
+GET http://localhost:5001/admin/auth
+
+###
+
+GET http://localhost:5001/admin/logout
+
+###
+
+### Add Product with Image Upload
+
+POST http://localhost:5001/admin/add/products
+Content-Type: multipart/form-data
+
+--boundary
+Content-Disposition: form-data; name="name"
+
+Cotton Yarn
+--boundary
+Content-Disposition: form-data; name="description"
+
+High-quality cotton yarn.
+--boundary
+Content-Disposition: form-data; name="pricePerKg"
+
+150
+--boundary
+Content-Disposition: form-data; name="stock"
+
+100
+--boundary
+Content-Disposition: form-data; name="color"
+
+White
+--boundary
+Content-Disposition: form-data; name="weightOptions"
+
+["1kg", "5kg", "10kg"]
+--boundary
+Content-Disposition: form-data; name="image"; filename="images.jpeg"
+

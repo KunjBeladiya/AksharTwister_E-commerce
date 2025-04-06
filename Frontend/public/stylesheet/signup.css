@@ -1,0 +1,165 @@
+/* From Uiverse.io by JohnnyCSilva */ 
+.signupFormdiv {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: #ffffff;
+    padding: 30px;
+    width: 450px;
+    border-radius: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  ::placeholder {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  .signupFormdiv button {
+    align-self: flex-end;
+  }
+  
+  .flex-column > label {
+    color: #151717;
+    font-weight: 600;
+  }
+  
+  .inputForm {
+    margin-top: 5px;
+    border: 1.5px solid #ecedec;
+    border-radius: 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .input {
+    margin-left: 10px;
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .input:focus {
+    outline: none;
+  }
+  
+  .inputForm:focus-within {
+    border: 1.5px solid #2d79f3;
+  }
+  
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+  }
+  
+  .flex-row > div > label {
+    font-size: 14px;
+    color: black;
+    font-weight: 400;
+  }
+  
+  .span {
+    font-size: 14px;
+    margin-left: 5px;
+    color: #2d79f3;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  
+  .button-submit {
+    background-color: #151717;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 10px;
+    height: 50px;
+    width: 100%;
+    cursor: pointer;
+  }
+  
+  .p {
+    text-align: center;
+    color: black;
+    font-size: 14px;
+  }
+  
+  .btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    gap: 10px;
+    border: 1px solid #ededef;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .btn:hover {
+    border: 1px solid #2d79f3;
+  }
+
+  .inputbox{
+    position: relative;
+  }
+  
+  .errmsg{
+    position: absolute;
+    display: block;
+    top: 75px;
+    border-radius: 0 0px 5px 5px;
+    width: 100%;
+    color: red;
+    margin: auto;
+  }
+      
+/* VERIFY EMAIL */
+
+.input-fields input {
+  height: 2.2em;
+  width: 2.2em;
+  outline: none;
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 1.5rem;
+  color: var(--ch-black);
+  border-radius: 5px;
+  border: 2.5px solid #e1e1e1;
+  background-color: #e1e1e1;
+}
+
+.verify {
+  font-weight: 500;
+  box-shadow: transparent;
+  transition: 0.5s ease;
+  user-select: none;
+}
+
+.verify:hover,.verify:focus {
+  color: white;
+  background: #2e2e2e;
+}
+
+.clear {
+  border: 1px solid #2e2e2e;
+  transition: 0.5s ease;
+  user-select: none;
+}
+
+.clear:hover,.clear:focus {
+  color: #fa5656;
+  background-color: white;
+  border: 1px solid #fa5656;
+}
+
+

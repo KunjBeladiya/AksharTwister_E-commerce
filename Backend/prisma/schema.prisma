@@ -1,0 +1,115 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement()) 
+  name       String   
+  email      String   @unique 
+  phone      String?   //Make phone optional by adding `?`
+  password   String   
+  createdAt  DateTime @default(now())
+  orders    Order[]
+  cart      Cart? 
+  addresses  Address[]
+}
+
+model Address {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  street    String
+  city      String
+  state     String
+  zipcode   String
+  country   String
+  orders    Order[]
+}
+
+model Admin {
+  id        Int   @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Product {
+  id            Int   @id @default(autoincrement())
+  name          String
+  description   String?
+  pricePerKg    Decimal
+  stock         Int
+  color         String?
+  imageUrl      String?
+  weightOptions Json?
+  createdAt     DateTime @default(now())
+  orderItems    OrderItem[]
+  cartItems     CartItem[]
+}
+
+model Order {
+  id          Int   @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  addressId   Int
+  address     Address  @relation(fields: [addressId], references: [id], onDelete: Cascade) // Added address relation
+  totalAmount  Decimal
+  paymentMethod PaymentMethod
+  status       OrderStatus @default(PENDING)
+  createdAt    DateTime @default(now())
+  orderItems   OrderItem[]
+}
+
+model OrderItem {
+  id        Int  @id @default(autoincrement())
+  orderId   Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Decimal
+}
+
+model Cart {
+  id        Int   @id @default(autoincrement())
+  userId    Int   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  cartItems CartItem[]
+}
+
+model CartItem {
+  id        Int  @id @default(autoincrement())
+  cartId    Int
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  productId Int
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Decimal?
+}
+
+enum PaymentMethod {
+  CASH
+  CHECK
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  CANCELED
+}
+
+
+

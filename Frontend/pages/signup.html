@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-widthdevice-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheet/signup.css">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <!-- From Uiverse.io by JohnnyCSilva -->
+    <div class="w-full h-[100vh] flex justify-center items-center">
+
+        <form id="signupForm" class="">
+
+            <h1 class="text-3xl font-bold ml-7 mb-5">Create an Account</h1>
+
+            <div class="signupFormdiv">
+                <div class="inputbox">
+                    <div class="flex-column">
+                        <label>Company name </label>
+                    </div>
+                    <div class="inputForm relative">
+                        <img src="/image/group_24dp_000000_FILL0_wght200_GRAD0_opsz24.svg">
+                        <input id="company" placeholder="Enter Company name" class="input" type="text">
+                    </div>
+                    <p id="companyError" class="errmsg"></p>
+                </div>
+
+
+                <div class="inputbox">
+                    <div class="flex-column">
+                        <label>Email </label>
+                    </div>
+                    <div class="inputForm">
+                        <img src="/image/alternate_email_24dp_000000_FILL0_wght200_GRAD0_opsz24.svg">
+                        <input id="email" placeholder="Enter your Email" class="input" type="text">
+                    </div>
+                    <p id="emailError" class="errmsg"></p>
+                </div>
+
+                <div class="inputbox">
+                    <div class="flex-column">
+                        <label>Password </label>
+                    </div>
+                    <div class="inputForm">
+                        <img src="/image/lock_24dp_000000_FILL0_wght200_GRAD0_opsz24.svg">
+                        <input id="password" placeholder="Enter your Password" class="input" type="password">
+                    </div>
+                    <p id="passwordError" class="errmsg"></p>
+                </div>
+
+                
+                <div id="generalError" class="text-red-500"></div>
+                <button id="signIn_btn" class="button-submit">Sign In</button>
+
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <p class="p line">Or With</p>
+
+                <p class="p">Already have an account? <a href="/user/login"><span class="span">Log In</span></a>
+                </p>
+            </div>
+
+        </form>
+
+        <form id="verifyform" class="hidden w-[35%] flex flex-col gap-8 mb-14 border-black border-2 p-3">
+            <div class="info">
+                <div class="title text-[1.5rem] font-bold text-center">Two-Factor Verification</div>
+                <p class="description text-center">Enter the two-factor authentication code provided by the authenticator app </p>
+            </div>
+            <div class="input-fields flex justify-center gap-3">
+                <input class="border" placeholder="" type="tel" maxlength="1">
+                <input class="border" placeholder="" type="tel" maxlength="1">
+                <input class="border" placeholder="" type="tel" maxlength="1">
+                <input class="border" placeholder="" type="tel" maxlength="1">
+                <input class="border" placeholder="" type="tel" maxlength="1">
+                <input class="border" placeholder="" type="tel" maxlength="1">
+            </div>
+    
+            <div class="flex gap-5 justify-center">
+                    <a class="verify block bg-black text-white py-2 px-5 rounded-md text-lg" href="#">Verify</a>
+                    <a class="clear block bg-white text-black py-2 px-5 rounded-md border-black text-lg" href="#">Clear</a>
+            </div>
+            
+           
+        </form>
+
+    </div>
+
+
+    <script src="/scripts/signup.js"></script>
+
+</body>
+
+</html>
