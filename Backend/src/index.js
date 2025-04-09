@@ -38,6 +38,7 @@ app.use("/verify", require("./routes/verifyRouter"));
 app.use("/user" , require("./routes/userRouter.js"));
 app.use("/admin" , require("./routes/adminRouter.js"));
 app.use("/product" , require("./routes/productRouter.js"));
+app.use("/cart" , require("./routes/cartRouter.js"));
 
 app.listen(PORT, () => {
   console.log(`server is running on ${PORT}`);

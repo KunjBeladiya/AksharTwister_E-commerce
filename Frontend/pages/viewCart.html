@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌈 Yarn Haven - Your Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #7C3AED;
+            --secondary: #F472B6;
+            --accent: #10B981;
+            --background: #F8FAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--background);
+            min-height: 100vh;
+        }
+
+        .cart-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .cart-header {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .cart-header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cart-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cart-columns {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
+            padding: 1rem 0;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr 0.5fr;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-details h3 {
+            color: #1F2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-details p {
+            color: #6B7280;
+            font-size: 0.9rem;
+        }
+
+        .item-qty {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            justify-self: center;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+        }
+
+        .price {
+            color: var(--accent);
+            font-weight: 600;
+            justify-self: center;
+        }
+
+        .cart-total {
+            text-align: right;
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .total-amount {
+            color: var(--accent);
+            font-weight: 700;
+            margin-left: 1rem;
+        }
+
+        .checkout-btn {
+            float: right;
+            margin-top: 2rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.3);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 4rem 0;
+            color: #6B7280;
+        }
+
+        .empty-cart i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .cart-columns,
+            .cart-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .item-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cart-total {
+                text-align: center;
+            }
+
+            .checkout-btn {
+                width: 100%;
+                float: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cart-wrapper">
+        <div class="cart-header">
+            <h1><i class="fas fa-shopping-basket"></i>Your Yarn Cart</h1>
+        </div>
+
+        <div class="cart-container">
+            <div class="cart-columns">
+                <span>Product</span>
+                <span>Quantity</span>
+                <span>Price</span>
+                <span>Total</span>
+                <span></span>
+            </div>
+
+            <div id="cart-items"></div>
+
+            <div class="cart-total">
+                Total: <span class="total-amount" id="cart-total"></span>
+            </div>
+
+            <button id="checkout-btn" class="checkout-btn">
+                Checkout Now <i class="fas fa-arrow-right"></i>
+            </button>
+
+            <div id="empty-cart" class="empty-cart" style="display: none;">
+                <i class="fas fa-shopping-basket"></i>
+                <h2>Your cart feels lonely!</h2>
+                <p>Add some colorful yarns to get started</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function updateQuantity(cartItemId, change) {
+            const token = localStorage.getItem("token");
+            const action = change === 1 ? 'increment' : 'decrement';
+
+            const res = await fetch('/cart/dataupdate', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({ itemId: cartItemId, action })
+            });
+
+            if (!res.ok) {
+                alert('Failed to update quantity');
+                return;
+            }
+
+            fetchCart();
+        }
+
+        async function deleteItem(cartItemId) {
+            const token = localStorage.getItem("token");
+            const confirmed = confirm("Are you sure you want to remove this item?");
+            if (!confirmed) return;
+
+            const res = await fetch(`/cart/delete/${cartItemId}`, {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if (!res.ok) {
+                alert("Failed to delete item");
+                return;
+            }
+
+            fetchCart();
+        }
+
+        async function fetchCart() {
+            try {
+                const token = localStorage.getItem("token");
+                const response = await fetch('/cart/data', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+
+                if (!response.ok) throw new Error('Failed to fetch cart');
+                const data = await response.json();
+
+                const cartItems = document.getElementById('cart-items');
+                const cartTotal = document.getElementById('cart-total');
+                const checkoutBtn = document.getElementById('checkout-btn');
+                const emptyCart = document.getElementById('empty-cart');
+
+                cartItems.innerHTML = '';
+
+                if (!data.items || data.items.length === 0) {
+                    emptyCart.style.display = 'block';
+                    checkoutBtn.style.display = 'none';
+                    cartTotal.textContent = '₹0';
+                    return;
+                }
+
+                data.items.sort((a, b) => a.itemId - b.itemId);
+
+                data.items.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.dataset.cartItemId = item.itemId;
+
+                    itemElement.innerHTML = `
+                        <div class="item-info">
+                            <img src="${item.imageUrl || 'placeholder.jpg'}" class="item-image" alt="${item.name}">
+                            <div class="item-details">
+                                <h3>${item.name}</h3>
+                                <p>Color: ${item.color || 'Multicolor'}</p>
+                            </div>
+                        </div>
+                        <div class="item-qty">
+                            <button class="qty-btn" data-change="-1"><i class="fas fa-minus"></i></button>
+                            <span>${item.quantity} kg</span>
+                            <button class="qty-btn" data-change="1"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="price">₹${item.pricePerKg}/kg</div>
+                        <div class="price total-amount">₹${item.total}</div>
+                        <div class="item-delete" style="text-align:center;">
+                            <button class="qty-btn" style="background: red;" data-delete="true">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+
+                    cartItems.appendChild(itemElement);
+                });
+
+                cartTotal.textContent = `₹${data.totalAmount}`;
+                checkoutBtn.style.display = 'block';
+                emptyCart.style.display = 'none';
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to load cart. Please try again.');
+            }
+        }
+
+        document.getElementById('cart-items').addEventListener('click', function (e) {
+            const btn = e.target.closest('.qty-btn');
+            const cartItem = e.target.closest('.cart-item');
+
+            if (!btn || !cartItem) return;
+
+            const cartItemId = parseInt(cartItem.dataset.cartItemId);
+
+            if (btn.dataset.change) {
+                const change = parseInt(btn.dataset.change);
+                updateQuantity(cartItemId, change);
+            }
+
+            if (btn.dataset.delete) {
+                deleteItem(cartItemId);
+            }
+        });
+
+        fetchCart();
+        setInterval(fetchCart, 30000);
+    </script>
+</body>
+
+</html>
