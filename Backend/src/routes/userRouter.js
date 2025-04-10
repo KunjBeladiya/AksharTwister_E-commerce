@@ -8,7 +8,9 @@ const {
   checkUserRegistered,
   getUserData,
   changeuserdata,
-  updatePassword
+  updatePassword,
+  getUserAddress,
+  addUserAddress
 } = require("../controllers/userController.js");
 const authMiddleware = require("../middlewares/AuthMiddleware.js");
 const prisma = require("../db/index.js");
@@ -24,6 +26,9 @@ router.post("/checkUser", checkUserRegistered);
 router.get("/profile/data", authMiddleware , getUserData);
 router.put("/profile/update" , authMiddleware , changeuserdata);
 router.put("/profile/updatePassword" , authMiddleware , updatePassword);
+
+router.get("/address", authMiddleware , getUserAddress);
+router.post("/address", authMiddleware , addUserAddress);
 
 router.get("/register" , (req,res) => {
   res.sendFile(path.join(__dirname , "../../../Frontend/pages/signup.html"));

@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const prisma = require("../db/index.js");
 const jwt = require("jsonwebtoken");
+const e = require("express");
 
 const registerUser = async (req, res) => {
   console.log("registering..");
@@ -127,30 +128,35 @@ const getUserData = async (req, res) => {
     },
   });
 
-  res.json({ success:true ,user:userdata});
+  res.json({ success: true, user: userdata });
 };
 
 const changeuserdata = async (req, res) => {
   const { name, phone } = req.body;
 
   try {
-      // Check if both name and phone are missing
-      if (!name && !phone) {
-          return res.status(400).json({ success: false, message: "No data provided for update" });
-      }
+    // Check if both name and phone are missing
+    if (!name && !phone) {
+      return res
+        .status(400)
+        .json({ success: false, message: "No data provided for update" });
+    }
 
-      const updatedUser = await prisma.user.update({
-          where: { id: req.user.userId },
-          data: { ...(name && { name }), ...(phone && { phone }) },
-      });
+    const updatedUser = await prisma.user.update({
+      where: { id: req.user.userId },
+      data: { ...(name && { name }), ...(phone && { phone }) },
+    });
 
-      return res.status(200).json({ success: true, message: "Profile updated", user: updatedUser });
+    return res
+      .status(200)
+      .json({ success: true, message: "Profile updated", user: updatedUser });
   } catch (error) {
-      console.error("Error updating user data:", error);
-      return res.status(500).json({ success: false, message: "Internal Server Error" });
+    console.error("Error updating user data:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal Server Error" });
   }
 };
-
 
 const updatePassword = async (req, res) => {
   const { oldPassword, newPassword, confirmPassword } = req.body;
@@ -187,24 +193,58 @@ const updatePassword = async (req, res) => {
       },
     });
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "Password updated successfully",
-        user: updateUser,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "Password updated successfully",
+      user: updateUser,
+    });
   } catch (error) {
     console.error("Error updating password:", error);
-    return res
-      .status(500)
-      .json({
-        success: false,
-        message: "Internal Server Error",
-        error: error.message,
-      });
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+      error: error.message,
+    });
   }
 };
+
+const getUserAddress = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const addresses = await prisma.address.findMany({
+      where: { userId },
+      orderBy: { createdAt: "desc" },
+    });
+    res.json({ addresses });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Failed to fetch addresses" });
+  }
+};
+
+const addUserAddress = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const { street, city, state, zipcode, country } = req.body;
+
+    const newAddress = await prisma.address.create({
+      data: {
+        userId,
+        street,
+        city,
+        state,
+        zipcode,
+        country,
+      },
+    });
+
+    res.status(201).json(newAddress);
+  } catch (error) {
+    console.error("Error adding address:", error);
+    res.status(500).json({ message: "Failed to add address" });
+  }
+};
+
 
 module.exports = {
   registerUser,
@@ -214,5 +254,7 @@ module.exports = {
   checkUserRegistered,
   getUserData,
   changeuserdata,
-  updatePassword
+  updatePassword,
+  getUserAddress,
+  addUserAddress
 };
