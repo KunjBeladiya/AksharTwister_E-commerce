@@ -8,8 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-
-        html{
+        html {
             scroll-behavior: smooth;
         }
 
@@ -77,7 +76,8 @@
             <img id="menulogo" class="h-8" src="/image/menu-svgrepo-com (3).svg">
         </button>
 
-        <a href="#h-container"><img id="logo" src="/image/logo.png" alt="Logo" class="h-10 md:h-12 sm:h-12 lg:h-12 text-white"></a>
+        <a href="#h-container"><img id="logo" src="/image/logo.png" alt="Logo"
+                class="h-10 md:h-12 sm:h-12 lg:h-12 text-white"></a>
 
         <ul id="navlist"
             class="hidden md:flex text-base md:gap-10 lg:gap-20  text-white font-semibold text-base sm:text-lg md:text-xl lg:text-2xl">
@@ -94,8 +94,10 @@
                 class="hidden skeleton flex justify-center items-center bg-blue-500 text-white px-3 rounded-md text-center">SignUp</a>
             <a href="login.html" id="loginbtn"
                 class="hidden skeleton flex justify-center items-center bg-blue-500 text-white px-3 rounded-md text-center">Login</a>
-            <a href="/cart"><img id="cartbtn" class="hidden skeleton h-9" src="/image/cart-shopping-svgrepo-com.png"></a>
-            <a href="/user/account"><img id="profilebtn" class="hidden skeleton h-9" src="/image/profile-circle-svgrepo-com.png"></a>
+            <a href="/cart" id="cart-bg" class="icon-link"><img id="cartbtn" class="hidden skeleton h-9"
+                    src="/image/cart-shopping-svgrepo-com.png"></a>
+            <a href="/user/account" id="acc-bg" class="icon-link"><img id="profilebtn" class="hidden skeleton h-9"
+                    src="/image/profile-circle-svgrepo-com.png"></a>
         </div>
 
     </nav>
@@ -502,11 +504,11 @@
                 console.log(data);
 
                 if (data.success) {
-                    document.getElementById("profilebtn").classList.remove("hidden","skeleton");
-                    document.getElementById("cartbtn").classList.remove("hidden","skeleton");
+                    document.getElementById("profilebtn").classList.remove("hidden", "skeleton");
+                    document.getElementById("cartbtn").classList.remove("hidden", "skeleton");
                 } else {
-                    document.getElementById("signupbtn").classList.remove("hidden","skeleton");
-                    document.getElementById("loginbtn").classList.remove("hidden","skeleton");
+                    document.getElementById("signupbtn").classList.remove("hidden", "skeleton");
+                    document.getElementById("loginbtn").classList.remove("hidden", "skeleton");
                 }
             } catch (error) {
                 console.log("error in homepage loading : ", error);

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="/stylesheet/admin.css">
+    <link rel="stylesheet" href="/stylesheet/order.css">
     <script src="https://cdn.tailwindcss.com"></script>
 
 
@@ -25,20 +26,41 @@
     <div class="main">
 
         <div id="dashboard" class="content active">
-            <h2>Dashboard</h2>
+            <h2 class="text-3xl font-semibold">Dashboard</h2>
         </div>
 
         <div id="orders" class="content">
-            <h2>Orders</h2>
-            <div id="orders-list"></div>
+
+
+            <div class="admin-container">
+                <h1 class="page-title">All Orders</h1>
+
+                <!-- Orders Table -->
+                <table class="orders-table" id="ordersTable">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Status</th>
+                            <th>User</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Orders will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
 
         <div id="products" class="content">
             <div class="flex justify-between">
-                <h2>Products</h2>
+                <h2 class="text-3xl font-semibold">Products</h2>
                 <button class="btn-add-product bg-blue-600 text-white py-2 px-4 rounded-lg"
-                    onclick="showProductForm()">add Product</button>
+                    onclick="showProductForm()">add
+                    Product</button>
             </div>
 
             <div id="product-list" class="mt-5">
@@ -91,9 +113,8 @@
         </div>
 
 
-
         <div id="settings" class="content">
-            <h2>Settings</h2>
+            <h2 class="text-3xl font-semibold">Settings</h2>
             <!-- Settings content goes here -->
         </div>
     </div>

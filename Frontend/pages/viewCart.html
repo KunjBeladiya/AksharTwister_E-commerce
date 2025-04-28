@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🌈 Yarn Haven - Your Cart</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -272,6 +273,7 @@
         }
 
         @media (max-width: 768px) {
+
             .cart-columns,
             .cart-item {
                 grid-template-columns: 1fr;
@@ -307,6 +309,63 @@
                 font-size: 2.2rem;
             }
         }
+
+        /***** address modal ****/
+        #addressModal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            width: 400px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 16px;
+            top: 10px;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .checkout-input {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0;
+            box-sizing: border-box;
+        }
+
+        .checkout-button {
+            padding: 8px 12px;
+            margin-top: 8px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .address-item {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 6px;
+            border-radius: 5px;
+        }
+
+        #addressList p {
+            margin: 4px 0;
+        }
     </style>
 </head>
 
@@ -340,6 +399,27 @@
                 <h2>Your cart feels lonely!</h2>
                 <p>Add some colorful yarns to get started</p>
             </div>
+        </div>
+    </div>
+
+    <!-- Address Modal -->
+    <div id="addressModal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Select Delivery Address</h2>
+
+            <div id="addressList"></div>
+
+            <h3>Add New Address</h3>
+            <form id="newAddressForm">
+                <input type="text" id="street" class="checkout-input" placeholder="Street" required />
+                <input type="text" id="city" class="checkout-input" placeholder="City" required />
+                <input type="text" id="state" class="checkout-input" placeholder="State" required />
+                <input type="text" id="zipcode" class="checkout-input" placeholder="Zip Code" required />
+                <input type="text" id="country" class="checkout-input" placeholder="Country" required />
+                <button type="submit" class="checkout-button">Add Address</button>
+            </form>
+
         </div>
     </div>
 
@@ -471,6 +551,138 @@
 
         fetchCart();
         setInterval(fetchCart, 30000);
+
+
+        //******** addres modal ********//
+
+        const modal = document.getElementById("addressModal");
+        const checkoutBtn = document.getElementById("checkout-btn");
+        const closeModal = document.querySelector(".modal-close");
+        const addressList = document.getElementById("addressList");
+        const form = document.getElementById("newAddressForm");
+
+        // Open modal
+        checkoutBtn.onclick = async () => {
+            modal.style.display = "block";
+            await fetchAddresses();
+        };
+
+        // Close modal
+        closeModal.onclick = () => {
+            modal.style.display = "none";
+        };
+
+        window.onclick = (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        async function fetchAddresses() {
+            console.log("fetch address")
+            addressList.innerHTML = "Loading...";
+            try {
+                const res = await fetch("/user/address", {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                });
+
+                const data = await res.json();
+                addressList.innerHTML = "";
+                const addresses = data.addresses;
+
+                if (addresses.length === 0) {
+                    addressList.innerHTML = "<p>No addresses found.</p>";
+                } else {
+                    addresses.forEach((addr) => {
+                        console.log(addr)
+                        const div = document.createElement("div");
+                        div.className = "address-item";
+                        div.innerHTML = `
+              <p><strong>${addr.street}</strong></p>
+              <p>${addr.city}, ${addr.state}, ${addr.zipcode}, ${addr.country}</p>
+              <button class="checkout-button" onclick="selectAddress('${addr.id}')">Deliver Here</button>
+            `;
+                        addressList.appendChild(div);
+                    });
+                }
+            } catch (err) {
+                addressList.innerHTML = "<p>Error loading addresses.</p>";
+            }
+        }
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const street = document.getElementById("street").value;
+            const city = document.getElementById("city").value;
+            const state = document.getElementById("state").value;
+            const zipcode = document.getElementById("zipcode").value;
+            const country = document.getElementById("country").value;
+
+            try {
+                const res = await fetch("/user/address", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    body: JSON.stringify({ street, city, state, zipcode, country }),
+                });
+
+                if (res.ok) {
+                    alert("Address added!");
+                    form.reset();
+                    fetchAddresses();
+                } else {
+                    alert("Failed to add address.");
+                }
+            } catch (err) {
+                alert("Error submitting address.");
+            }
+        });
+
+
+        async function selectAddress(id) {
+            modal.style.display = "none";
+
+            await createOrder(id); // lower camelCase
+        }
+
+        /********* Create Order Function **********/
+
+        async function createOrder(addressId) {
+            try {
+                const response = await fetch('/order/create', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        addressId: addressId, // 🔁 match backend naming
+                        paymentMethod: "CASH"
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    console.log("Order created successfully!", data);
+                    alert("Order placed successfully!");
+                    // Optionally redirect user to order history or thank-you page
+                    // window.location.href = "/orders";
+                } else {
+                    console.error("Failed to create order:", data);
+                    alert("Failed to create order: " + data.error);
+                }
+
+            } catch (error) {
+                console.error("Error creating order:", error);
+                alert("An unexpected error occurred.");
+            }
+        }
+
+
     </script>
 </body>
 

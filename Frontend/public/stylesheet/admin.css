@@ -34,6 +34,9 @@ body {
 .main {
     flex: 1;
     padding: 20px;
+    padding: 20px;
+    height: 100vh;
+    overflow-y: auto;
 }
 .content {
     display: none;
